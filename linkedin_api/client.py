@@ -151,7 +151,10 @@ class Client(object):
             proxies=self.proxies,
         )
 
-        data = res.json()
+        try:
+            data = res.json()
+        except:
+            data = None
 
         if data and data["login_result"] != "PASS":
             raise ChallengeException(data["login_result"])
@@ -160,6 +163,7 @@ class Client(object):
             raise UnauthorizedException()
 
         if res.status_code != 200:
+            print("status code is " +str(res.status_code))
             raise Exception()
 
         self._set_session_cookies(res.cookies)
