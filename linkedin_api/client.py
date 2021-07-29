@@ -164,6 +164,7 @@ class Client(object):
 
         if res.status_code != 200:
             print("status code is " +str(res.status_code))
+            print("response is "+str(res.text))
             raise Exception()
 
         self._set_session_cookies(res.cookies)
